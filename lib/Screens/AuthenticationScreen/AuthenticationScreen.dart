@@ -1,10 +1,21 @@
+import 'package:buspay_conductor/Screens/AuthenticationScreen/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Authenticationscreen extends StatelessWidget {
-  Authenticationscreen({super.key});
-  
+class Authenticationscreen extends StatefulWidget {
+  Authenticationscreen({super.key });
+    
+  @override
+  State<Authenticationscreen> createState() => _AuthenticationscreenState();
+}
+
+class _AuthenticationscreenState extends State<Authenticationscreen> {
+ 
+  bool _obscureText=true;
+  bool _toggle = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,6 +118,7 @@ class Authenticationscreen extends StatelessWidget {
                           //  labelText: "email",
                           isDense: true,
                           hintText: "john@email.com",
+                            hintStyle: GoogleFonts.inter(fontSize: 12.sp,fontWeight: FontWeight.w400),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
@@ -121,6 +133,7 @@ class Authenticationscreen extends StatelessWidget {
                       width: 276.w,
                       height: 46.h,
                       child: TextFormField(
+                        obscureText: _obscureText,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
                           // labelText: "Password",
@@ -130,12 +143,17 @@ class Authenticationscreen extends StatelessWidget {
                                 color: Colors.grey.shade300,
                               )),
                           hintText: "Password",
+                          hintStyle: GoogleFonts.inter(fontSize: 12.sp,fontWeight: FontWeight.w400),
                           isDense: true,
                           suffixIcon: GestureDetector(
-                            onTap: _togglePasswordVisibility,
+                            onTap:(){
+                                   setState(() {
+                                     _obscureText=!_obscureText;
+                                   });
+                            },
 
-                            child: Icon(
-                              Icons.visibility_off_outlined,
+                            child: Icon(_obscureText?
+                              Icons.visibility_off_outlined:Icons.visibility_outlined,
                               color: Colors.grey.shade300,
                             ),
                           ),
@@ -151,16 +169,27 @@ class Authenticationscreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Container(
-                          width: 12.w,
-                          height: 12.h,
-                          margin: EdgeInsets.only(
-                            left: 27.w,
-                            right: 3.w,
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _toggle=!_toggle;
+                            });
+                          },
+                          child: Container(
+                            width: 14.w,
+                            height: 14.h,
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.only(
+                              left: 33.w,
+                              right: 3.w,
+                            ),
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.grey.shade400, width: 1)),
+                                    child: Icon(
+                                      _toggle?
+                                     null: Icons.check,size: 13.sp,),
                           ),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.grey.shade400, width: 1)),
                         ),
                         SizedBox(
                           width: 3.w,
@@ -171,7 +200,7 @@ class Authenticationscreen extends StatelessWidget {
                               fontWeight: FontWeight.w500, fontSize: 12),
                         ),
                         SizedBox(
-                          width: 65.w,
+                          width: 41.w,
                         ),
                         Text(
                           "Forgot Password?",
@@ -207,17 +236,7 @@ class Authenticationscreen extends StatelessWidget {
                   ],
                 )),
           ),
-          Positioned(
-              bottom: 5.h,
-              left: 114.w,
-              right: 114.w,
-              child: Container(
-                width: 148.w,
-                height: 5.h,
-                decoration: BoxDecoration(
-                    color: Color(0xff111827),
-                    borderRadius: BorderRadius.circular(5)),
-              ))
+          
         ],
       ),
     );
