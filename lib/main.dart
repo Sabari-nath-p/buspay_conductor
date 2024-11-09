@@ -1,9 +1,16 @@
-import 'package:buspay_conductor/Screens/AuthenticationScreen/AuthenticationScreen.dart';
+
+
+import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
+import 'package:buspay_conductor/Screens/HomeScreen/HomeScreen.dart';
+import 'package:buspay_conductor/Screens/TripManagement/TripManagementSceen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+String baseUrl = "http://api.buspay.co";
+String login = "";
 void main() {
-  runApp(const buspay_conductor());
+  runApp( buspay_conductor());
 }
 
 class buspay_conductor extends StatelessWidget {
@@ -14,7 +21,7 @@ class buspay_conductor extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 850),
-      builder: (context, child) => MaterialApp(home: Authenticationscreen()),
+      builder: (context, child) => MaterialApp(home:CollectionScreen()),
     );
   }
 }
