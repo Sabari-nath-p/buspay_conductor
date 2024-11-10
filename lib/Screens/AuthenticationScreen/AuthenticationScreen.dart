@@ -2,6 +2,7 @@ import 'package:buspay_conductor/Screens/AuthenticationScreen/controller.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -221,7 +222,12 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder:(context)=>HomeScreen()));
+                         if(authctrl.emailController.text.isEmpty || authctrl.passwordController.text.isEmpty ){
+                          Fluttertoast.showToast(msg: "Please enter a valid credentials");
+                         }
+                         else{
+                          authctrl.loginSend();
+                         }
                         },
                         child: Container(
                           width: 279.w,
