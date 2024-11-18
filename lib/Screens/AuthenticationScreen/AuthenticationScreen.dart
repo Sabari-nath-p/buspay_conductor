@@ -15,7 +15,7 @@ class Authenticationscreen extends StatefulWidget {
 }
  AuthenticationController authctrl = Get.put(AuthenticationController()) ;
 class _AuthenticationscreenState extends State<Authenticationscreen> {
- 
+  bool _remember=false;
   bool _obscureText=true;
   bool _toggle = true;
   @override
@@ -175,28 +175,14 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
                       ),
                       Row(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _toggle=!_toggle;
-                              });
-                            },
-                            child: Container(
-                              width: 14.w,
-                              height: 14.h,
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.only(
-                                left: 33.w,
-                                right: 3.w,
-                              ),
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: Colors.grey.shade400, width: 1)),
-                                      child: Icon(
-                                        _toggle?
-                                       null: Icons.check,size: 13.sp,),
-                            ),
-                          ),
+                Checkbox(value: _remember, onChanged: (bool? value){
+                  setState(() {
+                    _remember = value!;
+                  });
+                },
+                activeColor: Color(0xFF0F67B1),
+                checkColor: Colors.white,
+                ),
                           SizedBox(
                             width: 3.w,
                           ),
@@ -222,14 +208,18 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
                       ),
                       InkWell(
                         onTap: () {
-                         if(authctrl.emailController.text.isEmpty || authctrl.passwordController.text.isEmpty ){
+                         if(authctrl.emailController.text.isEmpty ){
+                          Fluttertoast.showToast(msg: "Please enter a valid credentials");
+                         }
+                         else if (authctrl.passwordController.text.isEmpty ){
                           Fluttertoast.showToast(msg: "Please enter a valid credentials");
                          }
                          else{
                           authctrl.loginSend();
                          }
                         },
-                        child: Container(
+                        child: 
+                        Container(
                           width: 279.w,
                           height: 48.h,
                           margin: EdgeInsets.only(
@@ -248,7 +238,7 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
                                 color: Colors.white),
                           ),
                         ),
-                      ),
+                       ),
                     ],
                   )),
             ),

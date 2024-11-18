@@ -1,8 +1,11 @@
 
+import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/utils/ProgressIndication.dart';
+import 'package:buspay_conductor/Screens/TripManagement/TripManagementSceen.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -137,12 +140,38 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                                ],
                              ),
+                              
                                 
                             
                                                
                             SizedBox(height: 12.h),
                            
-                           
+                            Stack(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(width:15.w ,height: 15.w,
+                                                                    decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.circular(30.w)),),
+                                 SizedBox(
+                                width: 310.w,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.horizontal(right: Radius.circular(30.w)),
+                                  child: LinearProgressIndicator(
+                                    value: 0.6,
+                                    backgroundColor: Colors.grey[300],
+                                   valueColor: AlwaysStoppedAnimation(Colors.blue) ,
+                                    minHeight: 4,
+                                  ),
+                                ),
+                              ), 
+                               Container(width:15.w ,height: 15.w,
+                                                                    decoration: BoxDecoration(color: Colors.grey.shade300,borderRadius: BorderRadius.circular(30.w)),),
+                  
+                                ],  ),
+                                 
+                              ]
+                             
+                            ),
                             
                             
                             
@@ -212,32 +241,42 @@ class _HomeScreenState extends State<HomeScreen> {
          ),
        Row(
          children: [
-           Container(width: 160.w,height: 120.h,
-            margin: EdgeInsets.only(left: 15.w),
-           decoration: BoxDecoration(borderRadius: BorderRadius.circular(25),color: Colors.white,border: Border.all(color: Colors.grey.shade200,width: 1.w)),
-           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               SizedBox(width: 160.w,height: 61.h,
-                child: Image.asset("assets/images/bus.png")),
-               Text("Trip Manager",style: GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w600,color: Colors.black),)
-             ],
-           ),
+           InkWell(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TripManagementScreen()));
+            },
+             child: Container(width: 160.w,height: 120.h,
+              margin: EdgeInsets.only(left: 15.w),
+             decoration: BoxDecoration(borderRadius: BorderRadius.circular(25),color: Colors.white,border: Border.all(color: Colors.grey.shade200,width: 1.w)),
+             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 SizedBox(width: 160.w,height: 61.h,
+                  child: Image.asset("assets/images/bus.png")),
+                 Text("Trip Manager",style: GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w600,color: Colors.black),)
+               ],
+             ),
+             ),
            ),
            SizedBox(width: 15.w,),
-            Container(width: 160.w,height: 120.h,
-            margin: EdgeInsets.only(left: 10.w),
-            alignment: Alignment.center,
-           decoration: BoxDecoration(borderRadius: BorderRadius.circular(25),color: Colors.white,border: Border.all(color: Colors.grey.shade200,width: 1.w)),
-           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-             children: [
-               SizedBox(width: 160.w,height: 61.h,
-                child: Image.asset("assets/images/coin.png")),
-               Text("Collections",style: GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w600,color: Colors.black),)
-             ],
-           ),
-           ),
+            InkWell(
+              onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CollectionScreen()));
+            },
+              child: Container(width: 160.w,height: 120.h,
+              margin: EdgeInsets.only(left: 10.w),
+              alignment: Alignment.center,
+                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(25),color: Colors.white,border: Border.all(color: Colors.grey.shade200,width: 1.w)),
+                         child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+               children: [
+                 SizedBox(width: 160.w,height: 61.h,
+                  child: Image.asset("assets/images/coin.png")),
+                 Text("Collections",style: GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w600,color: Colors.black),)
+               ],
+                         ),
+                         ),
+            ),
          ],
        ),
        Expanded(child: Container()),

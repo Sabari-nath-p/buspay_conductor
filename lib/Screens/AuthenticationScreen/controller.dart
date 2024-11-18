@@ -21,10 +21,10 @@ class AuthenticationController extends GetxController{
     update();
     final Response = await post(Uri.parse(baseUrl+"/v1/auth/login"),headers: {
       "app-type":"conductor",
-      "content-Type" : "application/json"
+ 
     },
    body: {
-    "PhoneOrEmail" : emailController.text.trim(),
+    "email" : emailController.text.trim(),
     "password": passwordController.text.trim()
    }
     );
