@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class Authenticationscreen extends StatefulWidget {
@@ -13,17 +13,23 @@ class Authenticationscreen extends StatefulWidget {
   @override
   State<Authenticationscreen> createState() => _AuthenticationscreenState();
 }
- AuthenticationController authctrl = Get.put(AuthenticationController()) ;
+//  AuthenticationController authctrl = Get.put(AuthenticationController()) ;
 class _AuthenticationscreenState extends State<Authenticationscreen> {
   bool _remember=false;
   bool _obscureText=true;
   bool _toggle = true;
   @override
+  void initState() {
+  super.initState();
+  Get.put(AuthenticationController());
+}
+ 
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: GetBuilder<AuthenticationController>(builder: (_){
+        body: GetBuilder<AuthenticationController>(builder: (authctrl){
                  return Stack(
           children: [
             Positioned(
@@ -72,7 +78,7 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
               right: 24.w,
               child: Container(
                   width: 327.w,
-                  height: 305.w,
+                  height: 327.w,
                   padding: EdgeInsets.only(left: 5.w),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
@@ -136,7 +142,7 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
                       ),
                       SizedBox(
                         width: 276.w,
-                        height: 46.h,
+                        height: 50.h,
                         child: TextFormField(
                           controller: authctrl.passwordController,
                           obscureText: _obscureText,
@@ -204,7 +210,7 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
                         ],
                       ),
                       SizedBox(
-                        height: 20.h,
+                        height: 7.h,
                       ),
                       InkWell(
                         onTap: () {
@@ -239,6 +245,7 @@ class _AuthenticationscreenState extends State<Authenticationscreen> {
                           ),
                         ),
                        ),
+                        
                     ],
                   )),
             ),

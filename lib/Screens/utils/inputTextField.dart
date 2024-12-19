@@ -1,6 +1,7 @@
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 
@@ -18,7 +19,7 @@ Widget InputTextField(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextLable.appText(title,
-            size: 13.sp, fontWeight: FontWeight.w600, color: Colors.black),
+            size: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
         Container(
           margin: EdgeInsets.only(top: 7.h),
           decoration: BoxDecoration(
@@ -38,7 +39,7 @@ Widget InputTextField(
                 suffixIcon: suffixIcon,
                 hintStyle: TextStyle(
                   fontFamily: "Inter",
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                   fontSize: 16.sp,
                 ),
                 border: InputBorder.none),
@@ -48,3 +49,5 @@ Widget InputTextField(
     ),
   );
 }
+
+ 
