@@ -1,6 +1,7 @@
 
 import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/utils/ProgressIndication.dart';
+import 'package:buspay_conductor/Screens/TripManagement/NotripScreen.dart';
 import 'package:buspay_conductor/Screens/TripManagement/TripManagementSceen.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:flutter/material.dart';
@@ -243,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
          children: [
            InkWell(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TripManagementScreen()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NotripScreen()));
             },
              child: Container(width: 160.w,height: 120.h,
               margin: EdgeInsets.only(left: 15.w),

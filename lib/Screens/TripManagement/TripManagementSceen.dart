@@ -27,75 +27,7 @@ class _TripManagementScreenState extends State<TripManagementScreen> {
      List status=["on Journey","Not started"];
 
   @override
-      void initState(){
-    super.initState();
-    }
-    fetchconductor(String userID)async{
-    final Response=await http.get(Uri.parse(baseUrl+"/v1/user/$userID"));
-    if(Response.statusCode==200){
-    setState(() {
-      
-     conductordata =json.decode(Response.body)["data"]["id"] ;
-     print(conductordata);
-    });
-   }
-   else{
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Unable to load data")));
      
-   }
-  
-
-   }
-   
-   Future<void> fetchroute({required String busId}) async {
-   final Response = await http.get(Uri.parse(baseUrl+"/v1/route-bus?bus_id=$busId"));
-   if(Response.statusCode==200){
-    setState(() {
-      
-     Assign =json.decode(Response.body)["data"] ;
-    });
-   }
-   else{
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Unable to load data")));
-     
-   }
-  }
-   
-     void tripmanage()async{
-      if(routeid==null||jrnystartctrl.text.isEmpty||selectedItem==null){
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please fill all data")));
-          return;
-          }
-
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        String token = preferences.getString("accessToken").toString();
-        final trip ={
-          "route_id":routeid,
-       
-        };
-        final Response = await http.post(Uri.parse(baseUrl+"/v1/trips"),headers:{
-          'Content-Type': 'application/json',
-    "Authorization" : "Bearer $token",
-        },body:json.encode(trip)
-        );
-         if (Response.statusCode == 201) {
-   
-      Navigator.pop(
-        context,
-      );
-    } else {
-    
-      ScaffoldMessenger.of(context).showSnackBar(
-         SnackBar(
-            content: Text('Failed to update trip . Please try again.')),
-      );
-    }
-   print(Response.body);
-          }
-         
-  
-  
-
 
 
 
@@ -111,18 +43,9 @@ class _TripManagementScreenState extends State<TripManagementScreen> {
        child: Column(
         children: [
            SizedBox(height: 25.h,),
-           buildDropdown(labelText: "Current Route", 
-           hintText: "Route 1", 
-           items: Assign,
-           value: routeid, 
-           fieldName: "name",
-           keyId: "id",
-           onChanged: (newValue){
-            setState(() {
-              print("route$newValue");
-              routeid=newValue;
-            });
-           }),
+           InputTextField(controller: jrnystartctrl,
+          title: "Current Route",hint: "route 01"),
+          SizedBox(height: 5.h,),
        
         SizedBox(height: 5.h,),
          InputTextField(controller: jrnystartctrl,
@@ -156,67 +79,4 @@ class _TripManagementScreenState extends State<TripManagementScreen> {
   }
 }
 
-     Widget buildDropdown(
-      {required String labelText,
-      required String hintText,
-      var value,
-      required List items,
-      required Function(dynamic) onChanged,
-      String fieldName = "",
-      String keyId = ""}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-      SizedBox(height: 8.h),
-        Text(
-          labelText,
-          style:
-              GoogleFonts.inter( fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
-        ),
-      SizedBox(height: 8.h),
-      Container(
-          height: 48.h,
-          width: 360.w,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 222, 222, 222),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: const Color.fromRGBO(242, 244, 245, 1)),
-          ),
-          child: DropdownButtonFormField<dynamic>(
-            value: value,
-            decoration: InputDecoration(
-              isCollapsed: true,
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
-              border: InputBorder.none,
-              hintText: hintText,
-              hintStyle: GoogleFonts.inter(
-                color: Colors.grey[600],
-                fontSize: 14.sp,
-              ),
-            ),
-            items: items.map((item) {
-              return DropdownMenuItem(
-                value: (keyId == "") ? item : item[keyId],
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18.w),
-                  child: Text(
-                    (fieldName == "") ? item : item[fieldName],
-                    style: GoogleFonts.inter(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-            onChanged: onChanged,
-          ),
-        ),
-        SizedBox(height: 16.h),
-      ],
-    );
-  }
-
- 
+   
