@@ -27,8 +27,8 @@ class buspay_conductor extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 850),
-      builder: (context, child) => GetMaterialApp(home: HomeScreen()
-     // (login == "IN") ? HomeScreen(): AuthenticationScreen()
+      builder: (context, child) => GetMaterialApp(home:
+     (login == "IN") ? HomeScreen(): AuthenticationScreen()
       ),
     );
   }

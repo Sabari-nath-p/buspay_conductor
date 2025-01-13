@@ -47,9 +47,9 @@ int?selectedroute;
 
            buildDropdown(labelText: 'Select route Id', hintText:"route 01", 
            value: selectedroute,
-           items: tctrl.routelist.map((Value).toJson()).toList(),
-           fieldName: 'name', 
-            keyId: 'id',
+           items: tctrl.routelist.map((Value)=>Value.route).toList(),
+           fieldName:'name', 
+            keyId :'id',
             onChanged:(newValue){
               setState(() {
                 selectedroute=newValue;

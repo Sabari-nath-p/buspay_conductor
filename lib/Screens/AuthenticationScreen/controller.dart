@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class AuthenticationController {
   Future<Map<String, dynamic>> login(String email, String password) async {
-    final loginUrl = "$baseUrl/v1/auth/login";
+    final loginUrl = "$baseUrl/auth/login";
     final body = jsonEncode({"email": email, "password": password});
     final headers = {
       "Content-Type": "application/json",

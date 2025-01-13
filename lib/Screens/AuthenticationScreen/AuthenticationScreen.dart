@@ -56,7 +56,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(252, 252, 252, 1),
-      body: LayoutBuilder(
+      body: 
+      
+      
+      
+      LayoutBuilder(
         builder: (context, constraints) {
           return Stack(
             children: [
@@ -69,7 +73,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(15, 103, 177, 1),
                       image: DecorationImage(
-                        image: AssetImage('assets/star.png'),
+                        image: AssetImage('assets/images/star.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -79,7 +83,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                           top: 75.h,
                           left: (375 / 2).w - 14.w,
                           child: Image.asset(
-                            'assets/logo.png',
+                            'assets/images/appicon.png',
                             width: 28.w,
                             height: 28.h,
                           ),
