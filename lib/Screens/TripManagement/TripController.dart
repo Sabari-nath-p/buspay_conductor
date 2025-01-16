@@ -17,14 +17,15 @@ class  Tripcontroller extends GetxController{
       'Authorization': 'Bearer $token',
     };
   }
-  List<routemodel>routelist=[];
+
+  List<routelist>route=[];
 
 Future<void>fetchroute()async{
-    routelist.clear();
+    route.clear();
     final response= await get(Uri.parse(baseUrl+"/route-bus"));
    if (response.statusCode == 200) {
-      for (var data in json.decode(response.body)['data']) {
-        routelist.add(routemodel.fromJson(data));
+      for (var data in json.decode(response.body)['data']['route']) {
+        route.add(routelist.fromJson(data));
       }
     } else {
       throw Exception('Failed to load route');
@@ -35,8 +36,9 @@ Future<void>fetchroute()async{
 @override
 void onInit(){
     super.onInit();
+      loadUser();
     fetchroute();
-    loadUser();
+  
 
    
 }

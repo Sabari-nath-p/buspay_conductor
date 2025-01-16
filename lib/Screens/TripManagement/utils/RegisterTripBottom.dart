@@ -18,10 +18,10 @@ class BottomTripRegisterScreen extends StatefulWidget {
 
 class _BottomTripRegisterScreenState extends State<BottomTripRegisterScreen> {
 int?selectedroute;
+List routelist=[];
 
   @override
-  final Tripcontroller tctrl = Get.put(Tripcontroller());
-  
+ final Tripcontroller _tripController = Tripcontroller();
 
   Widget build(BuildContext context) {
     return Container(
@@ -41,13 +41,15 @@ int?selectedroute;
           SizedBox(height: 20.h,),
           TextLable.appText("Register Trip",color: Colors.black,size: 16.sp,fontWeight: FontWeight.w600),
           Container(width: 105.w,height: 1.h,decoration: BoxDecoration(color: Colors.grey,borderRadius: BorderRadius.circular(60.w)),
-),
+            ),
                  
           SizedBox(height: 20.h),
 
-           buildDropdown(labelText: 'Select route Id', hintText:"route 01", 
+           buildDropdown(labelText: 'Select route Id', hintText:"Route 01",
+            
            value: selectedroute,
-           items: tctrl.routelist.map((Value)=>Value.route).toList(),
+           items:_tripController.route.map((Value)=>Value.route).toList(),
+          //  tctrl.routelist.map((Value)=>Value.route).toList(),
            fieldName:'name', 
             keyId :'id',
             onChanged:(newValue){
@@ -55,6 +57,7 @@ int?selectedroute;
                 selectedroute=newValue;
               });
             }),
+            SizedBox(height: 60.h,),
           Container(
             width: 290.w,
             height: 50.w,
@@ -80,6 +83,7 @@ int?selectedroute;
                 color: Colors.grey[600],
             ),
           ),
+          
 
         ],
       ),

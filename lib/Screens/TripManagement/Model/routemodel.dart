@@ -1,47 +1,14 @@
-class routemodel {
-  int? id;
-  int? busId;
-  int? routeId;
-  String? startTiming;
-  List<String>? daysOfWeek;
-  String? finishTiming;
-  String? createdAt;
-  String? updatedAt;
+class routelist {
   Route? route;
 
-  routemodel(
-      {this.id,
-      this.busId,
-      this.routeId,
-      this.startTiming,
-      this.daysOfWeek,
-      this.finishTiming,
-      this.createdAt,
-      this.updatedAt,
-      this.route});
+  routelist({this.route});
 
-  routemodel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    busId = json['bus_id'];
-    routeId = json['route_id'];
-    startTiming = json['start_timing'];
-    daysOfWeek = json['days_of_week'].cast<String>();
-    finishTiming = json['finish_timing'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+  routelist.fromJson(Map<String, dynamic> json) {
     route = json['route'] != null ? new Route.fromJson(json['route']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['bus_id'] = this.busId;
-    data['route_id'] = this.routeId;
-    data['start_timing'] = this.startTiming;
-    data['days_of_week'] = this.daysOfWeek;
-    data['finish_timing'] = this.finishTiming;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
     if (this.route != null) {
       data['route'] = this.route!.toJson();
     }

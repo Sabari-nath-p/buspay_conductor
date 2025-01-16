@@ -1,6 +1,8 @@
 
 import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
+import 'package:buspay_conductor/Screens/CollectionScreen/collectionViewScreen.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/utils/ProgressIndication.dart';
+import 'package:buspay_conductor/Screens/ProfileScreen/ProfileviewScreen.dart';
 import 'package:buspay_conductor/Screens/TripManagement/NotripScreen.dart';
 import 'package:buspay_conductor/Screens/TripManagement/TripManagementSceen.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
@@ -280,6 +282,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
          ],
        ),
+       SizedBox(height: 15.h,),
+        InkWell(
+          onTap:() {
+             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>OwnerProfileScreen()));
+          },
+          child: Container(width: 160.w,height: 120.h,
+                margin: EdgeInsets.only(left: 10.w),
+                alignment: Alignment.center,
+                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(25),color: Colors.white,border: Border.all(color: Colors.grey.shade200,width: 1.w)),
+                           child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   SizedBox(width: 160.w,height: 61.h,
+                    child: Image.asset("assets/images/profile.png")),
+                   Text("Owner Profile",style: GoogleFonts.poppins(fontSize: 14.sp,fontWeight: FontWeight.w600,color: Colors.black),)
+                 ],
+                           ),
+                           ),
+        ),
        Expanded(child: Container()),
       Align(
         alignment: Alignment.bottomCenter,

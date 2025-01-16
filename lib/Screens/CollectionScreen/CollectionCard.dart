@@ -1,151 +1,100 @@
-
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:fl_chart/fl_chart.dart';
 
-class Collectioncard extends StatelessWidget {
-  const Collectioncard({super.key});
+class ExpandableCard extends StatefulWidget {
+  const ExpandableCard({Key? key}) : super(key: key);
+
+  @override
+  _ExpandableCardState createState() => _ExpandableCardState();
+}
+
+class _ExpandableCardState extends State<ExpandableCard> {
+  
+
+ 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 172.h,
-      width: 358.w,
-      margin: EdgeInsets.only( left:17.w, right: 17.w, top: 14.h),
-      decoration: BoxDecoration(
-        color: Color(0xE40F67B1),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Stack(
-        children: [
-          // Background Circle
-          Positioned(
-            top: -18,
-            left: -28,
-            child: Image.asset(
-              'assets/bgcircle.png',
-              height: 140,
-              width: 177,
+    return 
+      
+      Container(
+        width: 366.w,
+        height: 120.h,
+        margin:  EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
             ),
-          ),
-          // Text Content
-          Positioned(
-            top: 30.sp,
-            left: 20.7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextLable.appText(
-                 'Amount Earned',
-                  
-                    size: 13,
-                  
-                    fontWeight: FontWeight.w500,
-                  
-                ),
-                TextLable.appText(
-                  '248450.00',
-                 
-                    size: 24.sp,
-                    fontWeight: FontWeight.w800,
-                  
-                  
-                ),
-                const SizedBox(height: 23),
-            TextLable.appText(
-                  'Total Ticket',
-                 
-                    size: 13,
-                    color: Colors.white,
-                
-                ),
-               TextLable.appText(
-                  '100',
-                 
-                    size: 19.sp,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                
-                ),
-              ],
-            ),
-          ),
-          // Pie Chart
-          Positioned(
-            right: 10,
-            top: 10,
-            bottom:10,
-            child: SizedBox(
-              height: 154,
-              width: 154,
-              child: Stack(
+          ],
+        ),
+        child: Column(
+          children: [
+      
+            Padding(
+              padding: const EdgeInsets.only(left:16,right:16,top:12),
+              child: Row(
+               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Background White Circle
-                  Center(
-                    child: Container(
-                      height: 180,
-                      width: 180,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-                  // Pie Chart
-                  PieChart(
-                    PieChartData(
-                      sections: [
-                        PieChartSectionData(
-                          value: 70,
-                          color: Color(0xFF4ADEC3),
-                          radius: 20,
-                          showTitle: false,
-                        ),
-                        PieChartSectionData(
-                          value: 30,
-                          color: Color.fromRGBO(246, 198, 26, 1),
-                          radius: 20,
-                          showTitle: false,
-                        ),
-                      ],
-                      startDegreeOffset: -90,
-                      sectionsSpace: 2,
-                      centerSpaceRadius: 45,
-                    ),
-                  ),
-                  // Center Text in Pie Chart
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Collection',
-                          style: GoogleFonts.poppins(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Text(
-                          'Today-Total',
-                          style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                    TextLable.appText("Sinthumol",size: 13.sp,fontWeight: FontWeight.w500,fontFamily: "lato",color: Colors.black)
+                        ,
+                   TextLable.appText('(Haripad - Alappuzha)',size: 10.sp,fontWeight: FontWeight.w500,fontFamily: "lato",color: Colors.black)
+                  
+                 ,Expanded(child: Container()),
+                 TextLable.appText("#122343",size: 13.sp,fontWeight: FontWeight.w500,fontFamily: "lato",color: Colors.black)
+                         
+                 
                 ],
               ),
             ),
-          ),
+            SizedBox(height:10),
+            Container(
+              height:1,
+              width:333.w,
+              margin: EdgeInsets.only(left:16,right:16,top:0),
+              child: Divider(color: Color.fromRGBO(226,226,226,1)),
+                        
+            ),
+
+         
+            
+            Padding(
+              padding: const EdgeInsets.only(left:16.0,right:16,top:10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   TextLable.appText("2,100.88",size: 18.sp,fontWeight: FontWeight.w800,fontFamily: "lato",color: Colors.black)
+                  ,  TextLable.appText("54%",size: 18.sp,fontWeight: FontWeight.w800,fontFamily: "lato",color:Color.fromRGBO(74,160,222,1))
+                  
+     
+                ],
+              ),
+            ),
+              SizedBox(height: 5,),
+               Container(
+                height:7.h,
+                width:333.w,
+                decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.w),),
+                 child: LinearProgressIndicator(
+                  value: 0.54,
+                  backgroundColor: Colors.grey[400],
+                  color: Color.fromRGBO(74,160,222,1),
+                               ),
+               ),
+           
+  
         ],
       ),
     );
+
   }
 }
+  
+
+// TextField Widget
