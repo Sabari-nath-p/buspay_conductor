@@ -12,7 +12,7 @@ class CollectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: AppBar(
+       appBar: PreferredSize(preferredSize: Size.fromHeight(70.h), child: AppBar(
       backgroundColor: Color(0xff0F67B1),
       leading:  IconButton(
           icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),

@@ -24,12 +24,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-     appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: AppBar(
+     appBar: PreferredSize(preferredSize: Size.fromHeight(70.h), child: AppBar(
       backgroundColor: Color(0xff0F67B1),
-      title: Padding(
-        padding: EdgeInsets.only(left: 35.w,top: 15.h),
-        child: Text("Bus Pay",style: GoogleFonts.poppins(fontWeight: FontWeight.w600,color: Colors.white),),
-      ),
+      leading:  IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      title: Text("Bus Pay",style: GoogleFonts.poppins(fontWeight: FontWeight.w600,color: Colors.white),),
      )),
      body:    Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Container(width:15.w ,height: 15.w,
                                                                     decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.circular(30.w)),),
                                  SizedBox(
-                                width: 310.w,
+                                width: 300.w,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.horizontal(right: Radius.circular(30.w)),
                                   child: LinearProgressIndicator(

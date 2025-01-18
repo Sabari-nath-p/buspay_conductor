@@ -1,4 +1,5 @@
 
+import 'package:buspay_conductor/Screens/TripManagement/Model/routemodel.dart';
 import 'package:buspay_conductor/Screens/TripManagement/TripController.dart';
 
 import 'package:buspay_conductor/Screens/utils/inputTextField.dart';
@@ -18,12 +19,12 @@ class BottomTripRegisterScreen extends StatefulWidget {
 
 class _BottomTripRegisterScreenState extends State<BottomTripRegisterScreen> {
 int?selectedroute;
-List routelist=[];
 
   @override
- final Tripcontroller _tripController = Tripcontroller();
+ Tripcontroller _tripController = Get.put(Tripcontroller());
 
   Widget build(BuildContext context) {
+   
     return Container(
       
      width: double.infinity,
@@ -48,7 +49,7 @@ List routelist=[];
            buildDropdown(labelText: 'Select route Id', hintText:"Route 01",
             
            value: selectedroute,
-           items:_tripController.route.map((Value)=>Value.route).toList(),
+           items:_tripController.routelists.map((Value)=>Value.route).toList(),
           //  tctrl.routelist.map((Value)=>Value.route).toList(),
            fieldName:'name', 
             keyId :'id',

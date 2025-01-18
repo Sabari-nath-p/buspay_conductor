@@ -16,9 +16,14 @@ class _NotripScreenState extends State<NotripScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: AppBar(
+        appBar: PreferredSize(preferredSize: Size.fromHeight(70.h), child: AppBar(
       backgroundColor: Color(0xff0F67B1),
-      leading: Icon(Icons.arrow_back_ios,color: Colors.white,),
+      leading:  IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       title: Text("Manage Trip",style: GoogleFonts.poppins(fontWeight: FontWeight.w600,color: Colors.white),),
      )),
       body: Column(

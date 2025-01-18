@@ -77,16 +77,33 @@ class _ExpandableCardState extends State<ExpandableCard> {
               ),
             ),
               SizedBox(height: 5,),
-               Container(
-                height:7.h,
-                width:333.w,
-                decoration: BoxDecoration(borderRadius:BorderRadius.circular(10.w),),
-                 child: LinearProgressIndicator(
-                  value: 0.54,
-                  backgroundColor: Colors.grey[400],
-                  color: Color.fromRGBO(74,160,222,1),
-                               ),
-               ),
+                    Stack(
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(width:15.w ,height: 15.w,
+                                    margin: EdgeInsets.only(left: 15.w),
+                                                                    decoration: BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.circular(30.w)),),
+                                 SizedBox(
+                                width: 300.w,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.horizontal(right: Radius.circular(30.w)),
+                                  child: LinearProgressIndicator(
+                                    value: 0.6,
+                                    backgroundColor: Colors.grey[300],
+                                   valueColor: AlwaysStoppedAnimation(Colors.blue) ,
+                                    minHeight: 4,
+                                  ),
+                                ),
+                              ), 
+                               Container(width:15.w ,height: 15.w,
+                                                                    decoration: BoxDecoration(color: Colors.grey.shade300,borderRadius: BorderRadius.circular(30.w)),),
+                  
+                                ],  ),
+                                 
+                              ]
+                             
+                            ),
            
   
         ],
