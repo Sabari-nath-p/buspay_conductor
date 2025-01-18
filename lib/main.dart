@@ -1,9 +1,6 @@
-
-
 import 'package:buspay_conductor/Screens/AuthenticationScreen/AuthenticationScreen.dart';
 import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/HomeScreen.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,8 +12,10 @@ String login = "";
 void main() async {
   await WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
-   login = preferences.getString("LOGIN") ?? "";
-  runApp( buspay_conductor(),);
+  login = preferences.getString("LOGIN") ?? "";
+  runApp(
+    buspay_conductor(),
+  );
 }
 
 class buspay_conductor extends StatelessWidget {
@@ -27,9 +26,8 @@ class buspay_conductor extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(390, 850),
-      builder: (context, child) => GetMaterialApp(home:
-     (login == "IN") ? HomeScreen(): AuthenticationScreen()
-      ),
+      builder: (context, child) => GetMaterialApp(
+          home: (login == "IN") ? HomeScreen() : AuthenticationScreen()),
     );
   }
 }
