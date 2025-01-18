@@ -27,7 +27,7 @@ Future<void>fetchroute()async{
    // routelists.clear();
     final response= await get(Uri.parse(baseUrl+"/route-bus"));
    if (response.statusCode == 200) {
-      for (var data in json.decode(response.body)) {
+      for (var data in json.decode(response.body)['data']['route']) {
         routelists.add(routelist.fromJson(data));
         
       }

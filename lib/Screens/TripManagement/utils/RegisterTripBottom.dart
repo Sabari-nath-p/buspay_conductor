@@ -1,6 +1,7 @@
 
 import 'package:buspay_conductor/Screens/TripManagement/Model/routemodel.dart';
 import 'package:buspay_conductor/Screens/TripManagement/TripController.dart';
+import 'package:buspay_conductor/Screens/TripManagement/TripManagementSceen.dart';
 
 import 'package:buspay_conductor/Screens/utils/inputTextField.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
@@ -49,7 +50,7 @@ int?selectedroute;
            buildDropdown(labelText: 'Select route Id', hintText:"Route 01",
             
            value: selectedroute,
-           items:_tripController.routelists.map((Value)=>Value.route).toList(),
+           items:_tripController.routelists.map((Value)=>Value.route?.name??"unknown").toList(),
           //  tctrl.routelist.map((Value)=>Value.route).toList(),
            fieldName:'name', 
             keyId :'id',
@@ -59,29 +60,39 @@ int?selectedroute;
               });
             }),
             SizedBox(height: 60.h,),
-          Container(
-            width: 290.w,
-            height: 50.w,
-            margin: EdgeInsets.only(left: 6.w),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color:Color(0xff0F67B1),
-                borderRadius: BorderRadius.circular(10)),
-            child: TextLable.appText("Start",
-                size: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: Colors.white)),
+          InkWell(
+            onTap: (){
+               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TripManagementScreen()));
+            },
+            child: Container(
+              width: 290.w,
+              height: 50.w,
+              margin: EdgeInsets.only(left: 6.w),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color:Color(0xff0F67B1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: TextLable.appText("Start",
+                  size: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white)),
+          ),
              SizedBox(height: 6.h,),
 
           GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
-            child: TextLable.appText(
-               "Get Back",
-                 size: 13.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey[600],
+            child: GestureDetector(
+              onTap:() {
+            Navigator.pop(context);
+          },
+              child: TextLable.appText(
+                 "Get Back",
+                   size: 13.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.grey[600],
+              ),
             ),
           ),
           
