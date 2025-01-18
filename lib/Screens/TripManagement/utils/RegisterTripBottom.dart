@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:buspay_conductor/Screens/TripManagement/Model/routemodel.dart';
 import 'package:buspay_conductor/Screens/TripManagement/TripController.dart';
 import 'package:buspay_conductor/Screens/TripManagement/TripManagementSceen.dart';
@@ -50,7 +52,7 @@ int?selectedroute;
            buildDropdown(labelText: 'Select route Id', hintText:"Route 01",
             
            value: selectedroute,
-           items:_tripController.routelists.map((Value)=>Value.route?.name??"unknown").toList(),
+           items:_tripController.routelists.map((Value)=>Value.toJson()).toList(),
           //  tctrl.routelist.map((Value)=>Value.route).toList(),
            fieldName:'name', 
             keyId :'id',

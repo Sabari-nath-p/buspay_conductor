@@ -23,13 +23,20 @@ class  Tripcontroller extends GetxController{
   
 
 Future<void>fetchroute()async{
-  
+      SharedPreferences pref = await SharedPreferences.getInstance();
+    String token = pref.getString("accessToken").toString();
    // routelists.clear();
-    final response= await get(Uri.parse(baseUrl+"/route-bus"));
+    final response= await get(Uri.parse(baseUrl+"/route-bus"),headers:  {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    print(response.body);
+    print(response.statusCode);
    if (response.statusCode == 200) {
-      for (var data in json.decode(response.body)['data']['route']) {
+      for (var data in json.decode(response.body)['data']) {
         routelists.add(routelist.fromJson(data));
-        
+        update();
       }
     } else {
       throw Exception('Failed to load route');
@@ -39,23 +46,23 @@ Future<void>fetchroute()async{
 print(response);
 }
 
-int RoutetoID(var name) {
-    for (var data in routelists) {
-      if (data.route?.name == name) {
-        return data.route?.id ?? -1;
-      }
-    }
-    return -1;
-  }
+// int RoutetoID(var name) {
+//     for (var data in routelists) {
+//       if (data.route?.name == name) {
+//         return data.route?.id ?? -1;
+//       }
+//     }
+//     return -1;
+//   }
 
-  String RouteToName(var name) {
-    for (var data in routelists) {
-      if (data.route?.id.toString() == name.toString()) {
-        return data.route?.name ?? "";
-      }
-    }
-    return "--:--";
-  }
+//   String RouteToName(var name) {
+//     for (var data in routelists) {
+//       if (data.route?.id.toString() == name.toString()) {
+//         return data.route?.name ?? "";
+//       }
+//     }
+//     return "--:--";
+//   }
 
 
 @override
