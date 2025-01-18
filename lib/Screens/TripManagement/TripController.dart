@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 var auth;
-class  Tripcontroller extends GetxController{
-     loadUser() async {
+
+class Tripcontroller extends GetxController {
+  loadUser() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken").toString();
     auth = {
@@ -19,32 +21,33 @@ class  Tripcontroller extends GetxController{
     };
   }
 
-  List<routelist>routelists=[];
-  
+  List<routelist> routelists = [];
+  int? selectedRoute;
 
-Future<void>fetchroute()async{
-      SharedPreferences pref = await SharedPreferences.getInstance();
+  Future<void> fetchroute() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
     String token = pref.getString("accessToken").toString();
-   // routelists.clear();
-    final response= await get(Uri.parse(baseUrl+"/route-bus"),headers:  {
+    // routelists.clear();
+    final response = await get(Uri.parse(baseUrl + "/route-bus"), headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
     print(response.body);
     print(response.statusCode);
-   if (response.statusCode == 200) {
+    if (response.statusCode == 200) {
       for (var data in json.decode(response.body)['data']) {
         routelists.add(routelist.fromJson(data));
+
         update();
       }
     } else {
       throw Exception('Failed to load route');
     }
     update();
-  
-print(response);
-}
+
+    print(response);
+  }
 
 // int RoutetoID(var name) {
 //     for (var data in routelists) {
@@ -64,15 +67,10 @@ print(response);
 //     return "--:--";
 //   }
 
-
-@override
-void onInit(){
+  @override
+  void onInit() {
     super.onInit();
-      loadUser();
+    loadUser();
     fetchroute();
-  
-
-   
-}
-
+  }
 }
