@@ -1,5 +1,6 @@
 import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
 import 'package:buspay_conductor/Screens/CollectionScreen/collectionViewScreen.dart';
+import 'package:buspay_conductor/Screens/HomeScreen/utils/Overviewcard.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/utils/ProgressIndication.dart';
 import 'package:buspay_conductor/Screens/ProfileScreen/ProfileviewScreen.dart';
 import 'package:buspay_conductor/Screens/TripManagement/NotripScreen.dart';
@@ -39,152 +40,179 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w600, color: Colors.white),
               ),
             )),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 40.h,
-            ),
-        
+        body: Padding(
+          padding: EdgeInsets.only(left:20.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+               TextLable.appText(
+                             "Overview",
+                             color: Colors.black,
+                            size: 25.sp,
+                            fontWeight: FontWeight.w500),
+              SizedBox(
+                height: 10.h,
+              ),
+               Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DBOverviewCard(
+                            title: "Wallet \nBalance",
+                            value: "₹ 12,034",
+                            description: "Amount in account",
+                          ),
+                          SizedBox(width: 10.w,),
+                          DBOverviewCard(
+                            title: "Total \nEarnings",
+                            value: "₹ 12,034",
+                            description: "in last month",
+                          ),
+                          SizedBox(width: 10.w,),
+                          DBOverviewCard(
+                            title: "Ticket \nSold",
+                            value: "453",
+                            description: "in past last month",
+                          ),
+                        ],
+                      ),
           
-            SizedBox(
-              height: 15.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15.w),
-              child: Text(
+            
+              SizedBox(
+                height: 15.h,
+              ),
+              Text(
                 "C Control",
                 style: GoogleFonts.poppins(
                     fontWeight: FontWeight.w600, fontSize: 21.sp),
               ),
-            ),
-            Row(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => NotripScreen()));
-                  },
-                  child: Container(
-                    width: 160.w,
-                    height: 120.h,
-                    margin: EdgeInsets.only(left: 15.w),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.white,
-                        border: Border.all(
-                            color: Colors.grey.shade200, width: 1.w)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                            width: 160.w,
-                            height: 61.h,
-                            child: Image.asset("assets/images/bus.png")),
-                        Text(
-                          "Trip Manager",
-                          style: GoogleFonts.poppins(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        )
-                      ],
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => NotripScreen()));
+                    },
+                    child: Container(
+                      width: 160.w,
+                      height: 120.h,
+                     
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.white,
+                          border: Border.all(
+                              color: Colors.grey.shade200, width: 1.w)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                              width: 160.w,
+                              height: 61.h,
+                              child: Image.asset("assets/images/bus.png")),
+                          Text(
+                            "Trip Manager",
+                            style: GoogleFonts.poppins(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  width: 15.w,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => CollectionScreen()));
-                  },
-                  child: Container(
-                    width: 160.w,
-                    height: 120.h,
-                    margin: EdgeInsets.only(left: 10.w),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.white,
-                        border: Border.all(
-                            color: Colors.grey.shade200, width: 1.w)),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                            width: 160.w,
-                            height: 61.h,
-                            child: Image.asset("assets/images/coin.png")),
-                        Text(
-                          "Collections",
-                          style: GoogleFonts.poppins(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black),
-                        )
-                      ],
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => CollectionScreen()));
+                    },
+                    child: Container(
+                      width: 160.w,
+                      height: 120.h,
+                      //margin: EdgeInsets.only(left: 10.w),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.white,
+                          border: Border.all(
+                              color: Colors.grey.shade200, width: 1.w)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                              width: 160.w,
+                              height: 61.h,
+                              child: Image.asset("assets/images/coin.png")),
+                          Text(
+                            "Collections",
+                            style: GoogleFonts.poppins(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => OwnerProfileScreen()));
-              },
-              child: Container(
-                width: 160.w,
-                height: 120.h,
-                margin: EdgeInsets.only(left: 10.w),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    color: Colors.white,
-                    border:
-                        Border.all(color: Colors.grey.shade200, width: 1.w)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                        width: 160.w,
-                        height: 61.h,
-                        child: Image.asset("assets/images/profile.png")),
-                    Text(
-                      "Owner Profile",
-                      style: GoogleFonts.poppins(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black),
-                    )
-                  ],
-                ),
+                ],
               ),
-            ),
-            Expanded(child: Container()),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                  width: 310.w,
-                  height: 50.w,
+              SizedBox(
+                height: 15.h,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => OwnerProfileScreen()));
+                },
+                child: Container(
+                  width: 160.w,
+                  height: 120.h,
+                 
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      color: Color(0xff0F67B1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextLable.appText("Verify Ticket",
-                      size: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white)),
-            ),
-            SizedBox(
-              height: 20.h,
-            )
-          ],
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.white,
+                      border:
+                          Border.all(color: Colors.grey.shade200, width: 1.w)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          width: 160.w,
+                          height: 61.h,
+                          child: Image.asset("assets/images/profile.png")),
+                      Text(
+                        "Owner Profile",
+                        style: GoogleFonts.poppins(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(child: Container()),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                    width: 310.w,
+                    height: 50.w,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Color(0xff0F67B1),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextLable.appText("Verify Ticket",
+                        size: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white)),
+              ),
+              SizedBox(
+                height: 20.h,
+              )
+            ],
+          ),
         ));
   }
 }

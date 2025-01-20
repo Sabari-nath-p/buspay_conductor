@@ -4,6 +4,7 @@ import 'package:buspay_conductor/Screens/utils/inputTextField.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class BottomTripRegisterScreen extends StatelessWidget {
@@ -61,10 +62,19 @@ class BottomTripRegisterScreen extends StatelessWidget {
             SizedBox(
               height: 60.h,
             ),
+           
             InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
+                if (tctrl.selectedRoute!=null){
+               
+                       Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => TripManagementScreen()));
+                }
+                Fluttertoast.showToast(msg: "Please select route");
+               
+                 
+                
+               
               },
               child: Container(
                   width: 290.w,

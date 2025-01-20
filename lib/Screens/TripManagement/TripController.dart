@@ -23,6 +23,7 @@ class Tripcontroller extends GetxController {
 
   List<routelist> routelists = [];
   int? selectedRoute;
+  String?starttiming;
 
   Future<void> fetchroute() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -49,6 +50,8 @@ class Tripcontroller extends GetxController {
     print(response);
   }
 
+  
+
 // int RoutetoID(var name) {
 //     for (var data in routelists) {
 //       if (data.route?.name == name) {
@@ -72,5 +75,7 @@ class Tripcontroller extends GetxController {
     super.onInit();
     loadUser();
     fetchroute();
+    
+
   }
 }

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:buspay_conductor/Screens/TripManagement/Model/routemodel.dart';
+import 'package:buspay_conductor/Screens/TripManagement/TripController.dart';
 import 'package:buspay_conductor/Screens/utils/inputTextField.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:buspay_conductor/main.dart';
@@ -21,10 +23,12 @@ class _TripManagementScreenState extends State<TripManagementScreen> {
     String?selectedItem;
     List conductordata=[];
     TextEditingController jrnystartctrl=TextEditingController();
+    
+     Tripcontroller tctrl = Get.put(Tripcontroller());
    
      List<dynamic> Assign=[];
      int?routeid;
-     List status=["on Journey","Not started"];
+     List status=["on Journey","Not started","ended"];
 
   @override
      
@@ -63,7 +67,7 @@ class _TripManagementScreenState extends State<TripManagementScreen> {
                   });
                 }, ),
          
-           
+           SizedBox(height: 20.h,),
          Container(
               width: 320.w,
               height: 50.w,
@@ -72,7 +76,7 @@ class _TripManagementScreenState extends State<TripManagementScreen> {
               decoration: BoxDecoration(
                   color:Color(0xff0F67B1),
                   borderRadius: BorderRadius.circular(10)),
-              child: TextLable.appText("Update",
+              child: TextLable.appText("Complete trip",
                   size: 14.sp,
                   fontWeight: FontWeight.w500,
                   color: Colors.white)),
