@@ -54,27 +54,23 @@ class BottomTripRegisterScreen extends StatelessWidget {
                 items: tctrl.routelists.map((Value) => Value.toJson()).toList(),
                 //  tctrl.routelist.map((Value)=>Value.route).toList(),
                 fieldName: 'name',
-                //   keyId: 'id',
+                keyId: 'id',
                 onChanged: (newValue) {
                   // selectedroute = newValue;
+
                   tctrl.selectedRoute = newValue;
+                  tctrl.update();
                 }),
             SizedBox(
               height: 60.h,
             ),
-           
             InkWell(
               onTap: () {
-                if (tctrl.selectedRoute!=null){
-               
-                       Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TripManagementScreen()));
+                if (tctrl.selectedRoute != null) {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => TripManagementScreen()));
                 }
                 Fluttertoast.showToast(msg: "Please select route");
-               
-                 
-                
-               
               },
               child: Container(
                   width: 290.w,
