@@ -12,6 +12,7 @@ class BottomTripRegisterScreen extends StatelessWidget {
     super.key,
   });
   Tripcontroller tctrl = Get.put(Tripcontroller());
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<Tripcontroller>(builder: (_) {
@@ -69,8 +70,9 @@ class BottomTripRegisterScreen extends StatelessWidget {
                 if (tctrl.selectedRoute != null) {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => TripManagementScreen()));
+                } else {
+                  Fluttertoast.showToast(msg: "Please select route");
                 }
-                Fluttertoast.showToast(msg: "Please select route");
               },
               child: Container(
                   width: 290.w,
