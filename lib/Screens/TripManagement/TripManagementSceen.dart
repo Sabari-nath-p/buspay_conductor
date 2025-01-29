@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:buspay_conductor/Screens/TripManagement/Model/routemodel.dart';
-import 'package:buspay_conductor/Screens/TripManagement/TripController.dart';
+import 'package:buspay_conductor/Screens/TripManagement/controller/TripController.dart';
+import 'package:buspay_conductor/Screens/TripManagement/utils/LocationScreen.dart';
 import 'package:buspay_conductor/Screens/utils/inputTextField.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:buspay_conductor/main.dart';
@@ -19,17 +20,6 @@ class TripManagementScreen extends StatefulWidget {
 }
 
 class _TripManagementScreenState extends State<TripManagementScreen> {
-
-    String?selectedItem;
-    List conductordata=[];
-    TextEditingController jrnystartctrl=TextEditingController();
-    
-     Tripcontroller tctrl = Get.put(Tripcontroller());
-   
-     List<dynamic> Assign=[];
-     int?routeid;
-     List status=["on Journey","Not started","ended"];
-
   @override
      
 
@@ -49,40 +39,7 @@ class _TripManagementScreenState extends State<TripManagementScreen> {
      )),
      body: Padding(
        padding:  EdgeInsets.only(left: 15.w,right: 15.w),
-       child: Column(
-        children: [
-           SizedBox(height: 25.h,),
-           InputTextField(controller: jrnystartctrl,
-          title: "Current Route",hint: "route 01"),
-          SizedBox(height: 5.h,),
-       
-        SizedBox(height: 5.h,),
-         InputTextField(controller: jrnystartctrl,
-          title: "Journey Start Time",hint: "10:00:00 AM"),
-          SizedBox(height: 5.h,),
-           
-          buildDropdown(labelText: "Trip Status", hintText: "On journey", items: status, onChanged:(newValue) {
-                  setState(() {
-                    selectedItem = newValue;
-                  });
-                }, ),
-         
-           SizedBox(height: 20.h,),
-         Container(
-              width: 320.w,
-              height: 50.w,
-              margin: EdgeInsets.only(left: 6.w),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color:Color(0xff0F67B1),
-                  borderRadius: BorderRadius.circular(10)),
-              child: TextLable.appText("Complete trip",
-                  size: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white)),
-            
-        ],
-       ),
+       child:  LiveLocationScreen(),
      ),
     );
   }

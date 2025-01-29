@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:buspay_conductor/Screens/HomeScreen/HomeScreen.dart';
+import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'controller.dart';
 
@@ -13,10 +15,11 @@ class AuthenticationScreen extends StatefulWidget {
   @override
   _AuthenticationScreenState createState() => _AuthenticationScreenState();
 }
-
+  bool isloading=false;
 class _AuthenticationScreenState extends State<AuthenticationScreen> {
   bool _obscureText = true;
   bool _rememberMe = false;
+
   final AuthenticationController _authController = AuthenticationController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -26,6 +29,9 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       _showSnackBar('Email and password cannot be empty');
       return;
     }
+    setState(() {
+      isloading =true;
+    });
 
     try {
       final response = await _authController.login(
@@ -33,6 +39,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
       if (response['success']) {
         _showSnackBar('Login successful');
         Get.to(() => HomeScreen(), transition: Transition.rightToLeft);
+        
       } else {
         _showSnackBar(
             response['error'] ?? 'Login failed. Invalid credentials.');
@@ -96,37 +103,35 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
+                              TextLable.appText(
                                 'Sign in to your',
-                                style: GoogleFonts.poppins(
                                   color: Colors.white,
-                                  fontSize: 32.sp,
-                                  // fontFamily: 'Inter',
+                                  size: 32.sp,
+                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w700,
-                                ),
-                                textAlign: TextAlign.center,
+                              
+                                
                               ),
-                              Text(
+                              TextLable.appText(
                                 'Account',
-                                style: GoogleFonts.poppins(
+                                
                                   color: Colors.white,
-                                  fontSize: 32.sp,
-                                  //  fontFamily: 'Inter',
+                                  size: 32.sp,
+                                   fontFamily: 'Inter',
                                   fontWeight: FontWeight.w700,
-                                ),
-                                textAlign: TextAlign.center,
+                              
                               ),
                               SizedBox(height: 1.h),
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 20.w),
-                                child: Text(
+                                child: TextLable.appText(
                                   "Enter your email and password to log in",
-                                  style: GoogleFonts.poppins(
+                                 
                                     color: Colors.white,
-                                    fontSize: 12.sp,
-                                    //fontFamily: 'Inter',
-                                  ),
-                                  textAlign: TextAlign.center,
+                                    size: 12.sp,
+                                    fontFamily: 'Inter',
+                                
+                                 
                                 ),
                               ),
                             ],
@@ -161,16 +166,15 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                 color: Color(0xFFEDF1F3),
                               ),
                             ),
-                            Text(
-                              "Login Now",
-                              style: GoogleFonts.poppins(
+                            TextLable.appText(
+                              "login Now",
+                             
                                 color: Color(0xFF6C7278),
-                                fontSize: 12.sp,
-                                //fontFamily: 'Inter',
+                                size: 12.sp,
+                                fontFamily: 'Inter',
                                 fontWeight: FontWeight.w400,
-                                letterSpacing: -0.01,
-                                height: 1.5.h,
-                              ),
+                               
+                              
                             ),
                             Expanded(
                               child: Container(
@@ -183,50 +187,56 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                         ),
                         SizedBox(height: 24.h),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 18.w),
+                          padding: EdgeInsets.only(left: 18.w),
                           child: Container(
-                            width: double.infinity,
+                            width: 279.w,
                             height: 46.h,
-                            child: TextField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                hintText: 'Enter your email',
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 12.h,
-                                  horizontal: 16.w,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                              ),
-                            ),
+                            padding: EdgeInsets.only(bottom: 4.h),
+                            decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade200),borderRadius:BorderRadius.circular(10.w) ),
+                            child: 
+                           TextFormField(
+                         maxLines: 1,
+                        controller: emailController,
+          
+         
+            decoration: InputDecoration(
+                hintText: "Enter your email",
+                 contentPadding: EdgeInsets.only(left: 15.w,bottom: 4.h),
+                hintStyle: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                ),
+               
+                border: InputBorder.none),
+          ),
                           ),
                         ),
                         SizedBox(height: 16.h),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 18.w),
+                          padding: EdgeInsets.only(left: 18.w),
                           child: Container(
-                            width: double.infinity,
+                            width: 279.w,
                             height: 46.h,
+                            padding: EdgeInsets.only(bottom: 4.h),
+                             decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade200),borderRadius:BorderRadius.circular(10.w) ),
+                         
                             child: TextField(
                               controller: passwordController,
                               obscureText: _obscureText,
                               decoration: InputDecoration(
-                                hintText: 'Enter your password',
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 12.h,
-                                  horizontal: 16.w,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  borderSide: BorderSide(color: Colors.grey),
-                                ),
-                                suffixIcon: IconButton(
+                hintText: "Enter your password",
+                 contentPadding: EdgeInsets.only(left: 15.w,top: 4.h),
+                hintStyle: TextStyle(
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                ),
+               suffixIcon: IconButton(
                                   icon: Icon(
                                     _obscureText
-                                        ? Icons.visibility
-                                        : Icons.visibility_off,
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined,
                                     color: Colors.grey,
                                   ),
                                   onPressed: () {
@@ -235,52 +245,47 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
                                     });
                                   },
                                 ),
-                              ),
+                border: InputBorder.none),
+                              
+                              
+                            
                             ),
                           ),
                         ),
                         SizedBox(height: 16.h),
-                        Row(
-                          children: [
-                            Spacer(),
-                            Text(
-                              'Forgot Password?',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12.sp,
-                                //  fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xFF0F67B1),
-                              ),
-                            ),
-                          ],
-                        ),
+                       
                         SizedBox(height: 24.h),
                         Center(
-                          child: ElevatedButton(
-                            onPressed: handleLogin,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF0F67B1),
-                              minimumSize: Size(double.infinity, 48.h),
-                              padding: EdgeInsets.symmetric(
-                                vertical: 10.h,
-                                horizontal: 24.w,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                                side: BorderSide(
-                                  color: Color(0xFF0F67B1),
-                                  width: 1.w,
+                          child: SizedBox(
+                            width:279,
+                            height:48,
+                            child: ElevatedButton(
+                              onPressed: handleLogin,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Color(0xFF0F67B1),
+                                minimumSize: Size(double.infinity, 48.h),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 10.h,
+                                  horizontal: 24.w,
                                 ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  side: BorderSide(
+                                    color: Color(0xFF0F67B1),
+                                    width: 1.w,
+                                  ),
+                                ),
+                                elevation: 0,
                               ),
-                              elevation: 0,
-                            ),
-                            child: Text(
-                              'Login',
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                                //   fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
+                              child:isloading?LoadingAnimationWidget.staggeredDotsWave(color: Colors.white, size: 12.sp):
+                              TextLable.appText(
+                                'Login',
+                               
+                                  color: Colors.white,
+                                  size: 16.sp,
+                                     fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                              
                               ),
                             ),
                           ),

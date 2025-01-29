@@ -16,17 +16,15 @@ class DBOverviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 111.w,
-      height: 110.h,
-      padding: EdgeInsets.all(10.w),
+      height: 95.h,
+      padding: EdgeInsets.only(left:8.w),
+     alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                
-                blurRadius: .5,
-                color: Colors.black.withOpacity(.23))
-          ]),
+           border: Border.all(
+                              color: Colors.grey.shade100, width: 1.w)
+          
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,23 +33,24 @@ class DBOverviewCard extends StatelessWidget {
             children: [
               Image.asset(
                 "assets/images/wallet.png",
-                width: 24.w,
-                height: 24.w,
+                width: 26.w,
+                height: 26.w,
               ),
               SizedBox(width: 4.w,),
-              TextLable.appText(
-                   "$title", size: 11.sp, fontWeight: FontWeight.w500),
+              TextLable.appTextPoppins(
+                   "$title", size: 10.sp, fontWeight: FontWeight.w400),
             ],
           ),
           SizedBox(height:7.h),
-          TextLable.appText(
+          TextLable.appTextPoppins(
               "$value", size: 14.sp, fontWeight: FontWeight.w500),
           SizedBox(height:2.h),
-          TextLable.appText(
+          TextLable.appTextPoppins(
                "$description",
               size: 8.sp,
               fontWeight: FontWeight.w300),
-        ],
+             
+        ]
       ),
     );
   }

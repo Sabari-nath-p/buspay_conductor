@@ -16,15 +16,20 @@ class _NotripScreenState extends State<NotripScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(preferredSize: Size.fromHeight(70.h), child: AppBar(
+       appBar: PreferredSize(preferredSize: Size.fromHeight(70.h), child: AppBar(
       backgroundColor: Color(0xff0F67B1),
-      leading:  IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      title: Text("Manage Trip",style: GoogleFonts.poppins(fontWeight: FontWeight.w600,color: Colors.white),),
+      leading:  SizedBox(
+        width: 9.5,
+        height: 9.5,
+        child: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+      ),
+      
+      title:TextLable.appText("Manage Trip",size: 21.sp,fontWeight: FontWeight.w600,color: Colors.white,)
      )),
       body: Column(
       
@@ -34,13 +39,13 @@ class _NotripScreenState extends State<NotripScreen> {
          SizedBox(height: 250.h,),
            Image.asset("assets/images/notrip.png"),
           
-          TextLable.appTextPoppins("No Trip Started",
-                  size: 15.sp,
-                  fontWeight: FontWeight.w600,
+          TextLable.appText("No Trip Started",
+                  size: 14.sp,
+                  fontWeight: FontWeight.w400,
                   color: Color.fromARGB(231, 217, 217, 217)),
                    TextLable.appText("Click Start to Continue",
-                  size: 14.sp,
-                  fontWeight: FontWeight.w500,
+                  size: 12.sp,
+                  fontWeight: FontWeight.w300,
                   color: Color(0xffD9D9D9)),
 
                   Expanded(child: Container()),

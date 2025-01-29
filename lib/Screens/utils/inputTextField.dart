@@ -82,7 +82,7 @@ Widget InputTextField(
             decoration: InputDecoration(
               isCollapsed: true,
               isDense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 18.w),
+              contentPadding: EdgeInsets.only(left: 18.w,bottom: 2.h),
               border: InputBorder.none,
               hintText: hintText,
               hintStyle: GoogleFonts.inter(
@@ -93,14 +93,11 @@ Widget InputTextField(
             items: items.map((item) {
               return DropdownMenuItem(
                 value: (keyId == "") ? item : item[keyId],
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18.w),
-                  child: Text(
-                    (fieldName == "") ? item : item[fieldName],
-                    style: GoogleFonts.inter(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
+                child: Text(
+                  (fieldName == "") ? item : item[fieldName],
+                  style: GoogleFonts.inter(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               );

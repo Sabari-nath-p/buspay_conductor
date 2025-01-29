@@ -9,10 +9,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String baseUrl = "http://api.buspay.co/v1";
 String login = "";
+var authHead;
+String? token;
 void main() async {
   await WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
   login = preferences.getString("LOGIN") ?? "";
+  token = preferences.getString("accessToken");
+  if(login=="IN")
+    authHead = {
+      "Content-Type": "application/json",
+      "app-type": "conductor",
+       'Authorization': 'Bearer $token',
+
+    };
+
+
   runApp(
     buspay_conductor(),
   );

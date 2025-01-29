@@ -1,8 +1,12 @@
 import 'package:buspay_conductor/Screens/AuthenticationScreen/AuthenticationScreen.dart';
+import 'package:buspay_conductor/Screens/ProfileScreen/Profilecontroller.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
 import 'package:buspay_conductor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OwnerProfileScreen extends StatefulWidget {
@@ -13,6 +17,8 @@ class OwnerProfileScreen extends StatefulWidget {
 }
 
 class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
+
+  Profilecontroller profilectrl = Get.put(Profilecontroller());
    Widget buildSectionTitle(String title,
       {String? actionText, VoidCallback? onActionTap}) {
     return Padding(
@@ -38,7 +44,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
     return Row(
       children: [
         Icon(icon, color: Color.fromRGBO(151, 151, 151, 1), size: 20),
-        const SizedBox(width: 10),
+         SizedBox(width: 10.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,6 +60,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
     );
   }
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: AppBar(
@@ -67,104 +74,109 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
       
       title:TextLable.appText("Conductor Profile",size: 21.sp,fontWeight: FontWeight.w600,color: Colors.white,)
      )),
-     body:Column(
-      children: [
-        SizedBox(height: 30.h,),
-        Container(
-           height: 86.h,
-              width: 335.w,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(245, 245, 245, 1),
-                borderRadius: BorderRadius.circular(10),
-              ),
-          child: Padding(
-            padding:  EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-           
-              children: [
-                Container(width: 50.w,height: 50.h,
-                  margin: EdgeInsets.only(left: 8.w,top: 10.w),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(shape: BoxShape.circle,color: Color(0xffD9D9D9)),
-                 child: TextLable.appText("SP",size: 29.sp,fontWeight: FontWeight.w600,color: Color(0xff9797997)),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 8.w,top: 15.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                       TextLable.appText("Sabarinath P",size: 15.sp,fontWeight: FontWeight.w500,color:Colors.black),
-                        TextLable.appText("sabarinath5604@gmail.com",size: 14.sp,fontWeight: FontWeight.w400,color:Colors.black),
-                    ],
-                  ),
-                )
-            
-              ],
-            ),
-          ),
-        ),
-          buildSectionTitle('Contact Details'),
+     body:GetBuilder<Profilecontroller>(
+       builder: (_) {
+         return Column(
+          children: [
+            SizedBox(height: 30.h,),
             Container(
-              height: 200.h,
-              width: 335.w,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(245, 245, 245, 1),
-                borderRadius: BorderRadius.circular(10),
-              ),
+               height: 86.h,
+                  width: 335.w,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(245, 245, 245, 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
+                padding:  EdgeInsets.all(8.0),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
+               
                   children: [
-                    buildInfoCard(
-                        Icons.account_balance, 'Phone', '+91 7594092293'),
-                    const SizedBox(height: 7),
-                    buildInfoCard(
-                        Icons.home, 'Address', 'Home 01, Karuvatta, Alappuzha'),
-                    const SizedBox(height: 7),
-                    buildInfoCard(Icons.pin_drop, 'Pincode', '690517'),
-                    const SizedBox(height: 7),
-                    buildInfoCard(
-                        Icons.location_on_outlined, 'District', 'Alappuzha'),
+                    Container(width: 50.w,height: 50.h,
+                      margin: EdgeInsets.only(left: 8.w,top: 10.w),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(shape: BoxShape.circle,color: Color(0xffD9D9D9)),
+                     child: 
+                     TextLable.appText("SP",size: 29.sp,fontWeight: FontWeight.w600,color: Color(0xff9797997)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 8.w,top: 15.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                           TextLable.appText(profilectrl.name,size: 15.sp,fontWeight: FontWeight.w500,color:Colors.black),
+                            TextLable.appText(profilectrl.mail,size: 14.sp,fontWeight: FontWeight.w400,color:Colors.black),
+                        ],
+                      ),
+                    )
+                
                   ],
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: GestureDetector(
-                onTap: () async {
-                  print("workig");
-                  SharedPreferences preferences =
-                      await SharedPreferences.getInstance();
-                  preferences.setString("LOGIN", "OUT");
-                  login = "OUT";
-
-                  while (Navigator.canPop(context)) Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctx) => AuthenticationScreen()));
-                },
-                child: Container(
-                  width: 150,
-                  height: 40,
-                  alignment: Alignment.center,
-                  child:  TextLable.appTextPoppins("Log Out",size: 15.sp,fontWeight: FontWeight.w500,color:Colors.white),
-                  // Text(
-                  //   "LOG OUT",
-                  //   style: GoogleFonts.poppins(
-                  //       color: Colors.white, fontWeight: FontWeight.w500),
-                  // ),
+              buildSectionTitle('Contact Details'),
+                Container(
+                  height: 200.h,
+                  width: 335.w,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Color(0xFF0F67B1)),
+                    color: Color.fromRGBO(245, 245, 245, 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding:  EdgeInsets.all(12.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        buildInfoCard(
+                            Icons.account_balance, 'Phone', profilectrl.phone),
+                        const SizedBox(height: 7),
+                        buildInfoCard(
+                            Icons.home, 'Address', profilectrl.mail),
+                        const SizedBox(height: 7),
+                        buildInfoCard(Icons.pin_drop, 'Pincode', profilectrl.Pin),
+                        const SizedBox(height: 7),
+                        buildInfoCard(
+                            Icons.location_on_outlined, 'District', 'Alappuzha'),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            )
-      ],
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: GestureDetector(
+                    onTap: () async {
+                      print("working");
+                      SharedPreferences preferences =
+                          await SharedPreferences.getInstance();
+                      preferences.setString("LOGIN", "OUT");
+                      login = "OUT";
+         
+                      while (Navigator.canPop(context)) Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (ctx) => AuthenticationScreen()));
+                    },
+                    child: Container(
+                      width: 150,
+                      height: 40,
+                      alignment: Alignment.center,
+                      child:  TextLable.appTextPoppins("Log Out",size: 15.sp,fontWeight: FontWeight.w500,color:Colors.white),
+                      // Text(
+                      //   "LOG OUT",
+                      //   style: GoogleFonts.poppins(
+                      //       color: Colors.white, fontWeight: FontWeight.w500),
+                      // ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(0xFF0F67B1)),
+                    ),
+                  ),
+                )
+          ],
+         );
+       }
      ) ,
     );
   }

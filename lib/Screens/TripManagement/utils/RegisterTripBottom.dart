@@ -1,4 +1,4 @@
-import 'package:buspay_conductor/Screens/TripManagement/TripController.dart';
+import 'package:buspay_conductor/Screens/TripManagement/controller/TripController.dart';
 import 'package:buspay_conductor/Screens/TripManagement/TripManagementSceen.dart';
 import 'package:buspay_conductor/Screens/utils/inputTextField.dart';
 import 'package:buspay_conductor/Screens/utils/textLabel.dart';
@@ -18,7 +18,7 @@ class BottomTripRegisterScreen extends StatelessWidget {
     return GetBuilder<Tripcontroller>(builder: (_) {
       return Container(
         width: double.infinity,
-        height: 297.h,
+        height: 320.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.w),
@@ -49,8 +49,9 @@ class BottomTripRegisterScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             buildDropdown(
-                labelText: 'Select route Id',
-                hintText: "Route 01",
+                labelText: 'Select Route',
+                hintText: "Select route",
+              
                 value: tctrl.selectedRoute,
                 items: tctrl.routelists.map((Value) => Value.toJson()).toList(),
                 //  tctrl.routelist.map((Value)=>Value.route).toList(),
@@ -58,12 +59,12 @@ class BottomTripRegisterScreen extends StatelessWidget {
                 keyId: 'id',
                 onChanged: (newValue) {
                   // selectedroute = newValue;
-
+      
                   tctrl.selectedRoute = newValue;
                   tctrl.update();
                 }),
             SizedBox(
-              height: 60.h,
+              height: 45.h,
             ),
             InkWell(
               onTap: () {
@@ -88,7 +89,7 @@ class BottomTripRegisterScreen extends StatelessWidget {
                       color: Colors.white)),
             ),
             SizedBox(
-              height: 6.h,
+              height: 8.h,
             ),
             GestureDetector(
               onTap: () {
@@ -105,6 +106,9 @@ class BottomTripRegisterScreen extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
+            ),
+            SizedBox(
+              height: 13.h,
             ),
           ],
         ),
