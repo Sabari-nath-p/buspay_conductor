@@ -59,8 +59,9 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
       ],
     );
   }
+  
   @override
-
+  
   Widget build(BuildContext context) {
     return Scaffold(
        appBar: PreferredSize(preferredSize: Size.fromHeight(80.h), child: AppBar(
@@ -86,6 +87,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                     color: Color.fromRGBO(245, 245, 245, 1),
                     borderRadius: BorderRadius.circular(10),
                   ),
+
               child: Padding(
                 padding:  EdgeInsets.all(8.0),
                 child: Row(
@@ -97,7 +99,7 @@ class _OwnerProfileScreenState extends State<OwnerProfileScreen> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(shape: BoxShape.circle,color: Color(0xffD9D9D9)),
                      child: 
-                     TextLable.appText("SP",size: 29.sp,fontWeight: FontWeight.w600,color: Color(0xff9797997)),
+                     TextLable.appText(profilectrl.name.isNotEmpty?profilectrl.name[0].toUpperCase():" ",size: 29.sp,fontWeight: FontWeight.w600,color: Color(0xff9797997)),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 8.w,top: 15.w),

@@ -1,5 +1,6 @@
 import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
 import 'package:buspay_conductor/Screens/CollectionScreen/collectionViewScreen.dart';
+
 import 'package:buspay_conductor/Screens/HomeScreen/utils/Overviewcard.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/utils/ProgressIndication.dart';
 import 'package:buspay_conductor/Screens/ProfileScreen/ProfileviewScreen.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -19,6 +21,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
+  String barcodeScanRes = "Scan result will be displayed";
+  Future<void>_scanQr()async{
+    String scanResult;
+    try{
+      scanResult =  await FlutterBarcodeScanner.scanBarcode("#ff6666", "cancel", true, ScanMode.QR);
+    }
+    catch(e){
+      scanResult = "failed to get scan result";
+    }
+    if (!mounted) return;
+
+    setState(() {
+      barcodeScanRes = scanResult;
+    });
+  
+
+   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -196,18 +216,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Expanded(child: Container()),
-              Container(
-                  margin: EdgeInsets.only(left:15.w ),
-                  width: 310.w,
-                  height: 50.w,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: Color(0xff0F67B1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: TextLable.appText("Verify Ticket",
-                      size: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white)),
+              InkWell(
+                onTap: () => _scanQr(),
+                child: Container(
+                    margin: EdgeInsets.only(left:15.w ),
+                    width: 310.w,
+                    height: 50.w,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Color(0xff0F67B1),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextLable.appText("Verify Ticket",
+                        size: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white)),
+              ),
               SizedBox(
                 height: 20.h,
               )

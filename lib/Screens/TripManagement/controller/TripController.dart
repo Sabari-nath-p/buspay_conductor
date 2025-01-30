@@ -42,6 +42,7 @@ class Tripcontroller extends GetxController {
 
         update();
       }
+        print(response.body);
     } else {
       throw Exception('Failed to load route');
     }

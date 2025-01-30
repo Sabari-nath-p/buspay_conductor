@@ -2,6 +2,7 @@ import 'package:buspay_conductor/Screens/AuthenticationScreen/AuthenticationScre
 import 'package:buspay_conductor/Screens/CollectionScreen/CollectionScreen.dart';
 import 'package:buspay_conductor/Screens/HomeScreen/HomeScreen.dart';
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -39,7 +40,9 @@ class buspay_conductor extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 850),
       builder: (context, child) => GetMaterialApp(
-          home: (login == "IN") ? HomeScreen() : AuthenticationScreen()),
+          home: (login == "IN") ? HomeScreen() : AuthenticationScreen(),
+         
+          ),
     );
   }
 }
